@@ -13,6 +13,7 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
@@ -20,7 +21,8 @@ import jakarta.persistence.Table;
 public class UsuarioEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="rcf_usuario_seq")
+	@SequenceGenerator(name="rcf_usuario_seq", sequenceName="rcf_usuario_id_seq", allocationSize = 1)
 	private Long id;
 	
 	@Column(nullable = false)
