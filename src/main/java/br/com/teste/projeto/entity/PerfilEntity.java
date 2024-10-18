@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -23,7 +24,8 @@ import lombok.Setter;
 public class PerfilEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="rcf_perfil_seq")
+	@SequenceGenerator(name="rcf_perfil_seq", sequenceName="rcf_perfil_id_seq", allocationSize = 1)
 	private Long id;
 	
 	@Column(nullable = false)

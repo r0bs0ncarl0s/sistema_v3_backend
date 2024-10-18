@@ -10,6 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 
 @Entity
@@ -17,7 +18,8 @@ import jakarta.persistence.Table;
 public class RecursoEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="rcf_recurso_seq")
+	@SequenceGenerator(name="rcf_recurso_seq", sequenceName="rcf_recurso_id_seq", allocationSize = 1)
 	private Long id;
 	
 	@Column(nullable = false)

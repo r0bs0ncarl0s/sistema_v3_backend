@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -24,7 +25,8 @@ import lombok.Setter;
 public class PermissaoPerfilRecursoEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="rcf_per_per_rec_seq")
+	@SequenceGenerator(name="rcf_per_per_rec_seq", sequenceName="rcf_per_per_rec_id_seq", allocationSize = 1)
 	private Long id;
 	
 	@ManyToOne

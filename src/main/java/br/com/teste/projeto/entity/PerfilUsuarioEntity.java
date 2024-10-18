@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,7 +23,8 @@ import lombok.Setter;
 public class PerfilUsuarioEntity {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator="rcf_perf_usu_seq")
+	@SequenceGenerator(name="rcf_perf_usu_seq", sequenceName="rcf_perf_usu_id_seq", allocationSize = 1)
 	private Long id;
 	
 	@ManyToOne
