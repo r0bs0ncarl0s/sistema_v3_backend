@@ -20,6 +20,7 @@ public class PerfilUsuarioService {
 		return perfilUsuarios.stream().map(PerfilUsuarioDTO::new).toList();
 	}
 	
+	
 	public void inserir(PerfilUsuarioDTO perfilUsuario) {
 		PerfilUsuarioEntity perfilUsuarioEntity = new PerfilUsuarioEntity(perfilUsuario);
 		perfilUsuarioRepository.save(perfilUsuarioEntity);

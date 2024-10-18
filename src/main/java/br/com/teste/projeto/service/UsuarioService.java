@@ -8,12 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+
 import br.com.teste.projeto.dto.UsuarioDTO;
 import br.com.teste.projeto.entity.UsuarioEntity;
 import br.com.teste.projeto.entity.UsuarioVerificadorEntity;
 import br.com.teste.projeto.entity.enums.TipoSituacaoUsuario;
 import br.com.teste.projeto.repository.UsuarioRepository;
 import br.com.teste.projeto.repository.UsuarioVerificadorRepository;
+import br.com.teste.utils.Constantes;
 
 @Service
 public class UsuarioService {
@@ -27,18 +30,23 @@ public class UsuarioService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
-	@Autowired
-	private EmailService emailService;
+	//@Autowired
+	//private EmailService emailService;
 	
 	public List<UsuarioDTO> listarTodos(){
 		List<UsuarioEntity> usuarios = usuarioRepository.findAll();
 		return usuarios.stream().map(UsuarioDTO::new).toList();
 	}
 	
-	public void inserir(UsuarioDTO usuario) {
-		UsuarioEntity usuarioEntity = new UsuarioEntity(usuario);
-		usuarioEntity.setSenha(passwordEncoder.encode(usuario.getSenha()));
-		usuarioRepository.save(usuarioEntity);
+	public String inserir(UsuarioDTO usuario) {
+		try {
+			UsuarioEntity usuarioEntity = new UsuarioEntity(usuario);
+			usuarioEntity.setSenha(passwordEncoder.encode(usuario.getSenha()));
+			usuarioRepository.save(usuarioEntity);
+		} catch (Exception e) {
+            return Constantes.MSG_ERRO + e.getMessage();
+        }
+        return Constantes.MSG_SUCESSO;
 	}
 	
 	public void inserirNovoUsuario(UsuarioDTO usuario) {
@@ -55,9 +63,9 @@ public class UsuarioService {
 		usuarioVerificadorRepository.save(verificador);
 		
 		//TODO - Enviar um email para verificar a conta
-		emailService.enviarEmailTexto(usuario.getEmail(), 
+		/*emailService.enviarEmailTexto(usuario.getEmail(), 
 				"Novo usuário cadastrado", 
-				"Você está recebendo um email de cadastro o número para validação é " + verificador.getUuid());
+				"Você está recebendo um email de cadastro o número para validação é " + verificador.getUuid());*/
 		
 	}
 	
