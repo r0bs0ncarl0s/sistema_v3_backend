@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class QueueSender {
-
+/*
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
@@ -17,5 +17,5 @@ public class QueueSender {
     public void send(String order) {
         rabbitTemplate.convertAndSend(this.queue.getName(), order);
     }
-    
+*/    
 }

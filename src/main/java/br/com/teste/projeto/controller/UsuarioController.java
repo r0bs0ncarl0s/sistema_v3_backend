@@ -47,7 +47,7 @@ public class UsuarioController {
 			if(usuarioValido(usuario)) {
 				String msg = usuarioService.inserir(usuario);
 				if(msg!=null && msg.equals(Constantes.MSG_SUCESSO)) {
-					rabbitMQController.enviarEmail(new EmailDTO(usuario.getEmail(), "Novo Usuário", "Seu usuário foi inserido com sucesso!"));
+					rabbitMQController.enviarEmail(new EmailDTO(usuario.getEmail(), "Novo Usuário", "O usuário " + usuario.getLogin() +  " foi inserido com sucesso!"));
 				}else {
 					rabbitMQController.registrarError(msg);
 				}

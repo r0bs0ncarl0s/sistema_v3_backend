@@ -39,7 +39,7 @@ public class QueueConsumer {
             throw new BusinessException("testando a excecao");
         }
     }
-*/
+
     @RabbitListener(queues = {"${rabbitmq.queue.log}"})
     public void registrarLog(@Payload String log) throws BusinessException {
         System.out.println("MESSAGE : " + log + "  " + LocalDateTime.now());
@@ -62,5 +62,5 @@ public class QueueConsumer {
 			rabbitMQController.registrarError("Ocorreu um erro às "  + LocalDateTime.now() + " ao tentar enviar o email para a caixa postal " + email.getEmailDestino());
 		}
 	}
-    
+*/    
 }
